@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import geopandas as gp
+import matplotlib.pyplot as plt
 
 def apa():
     # Iniciar o Plot da Área de Estudo
