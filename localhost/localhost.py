@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 import geopandas as gp
 import matplotlib.pyplot as plt
+import pandas as pd
 
-def apa():
+def apa(coord=False, sep=";"):
+    """Plot da Área de Estudo
+    coord = nome do arquivo csv, contendo variáveis
+    nominadas 'Lat' e 'Lon'.
+
+    sep = formato de separação dos dados.
+    """
     # Iniciar o Plot da Área de Estudo
     laguna = gp.read_file('ShapeFiles/DestaqueLaguna.shp')
     sc = gp.read_file('ShapeFiles/DestaqueSC.shp')
@@ -21,7 +28,12 @@ def apa():
     rios.plot(ax=ax, color='red')
     apa.plot(ax=ax, color='green')
     #testing station inclusion point
-    plt.plot(-48.85, -28.5, marker='o', color='red', markersize=5)
+    if coord:
+        data = pd.read_csv(coord, sep=sep)
+        lat = data['Lat']
+        lon = data['Lon']
+        for i in range(len(lat)):
+            plt.plot(lon[i], lat[i], marker='o', color='red', markersize=5)
 
     plt.show()
 
